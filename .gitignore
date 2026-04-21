@@ -18,6 +18,7 @@ release/
 
 # Vite specific
 .vite/
+.electron-vite/
 
 # Logs
 logs
@@ -62,6 +63,8 @@ desktop.ini
 *.db
 *.sqlite
 *.sqlite3
+*.bak
+*.tmp
 
 # SQLite Temporary and Log Files (They are formed at the moment of writing.)
 *.db-journal
