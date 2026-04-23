@@ -1,59 +1,51 @@
 import React from 'react';
 
-const SunIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-4 h-4" strokeWidth="2.5">
-    <circle cx="12" cy="12" r="5" />
-    <path strokeLinecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M19.78 4.22l-1.42 1.42" />
-  </svg>
-);
-
-const MoonIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-4 h-4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-  </svg>
-);
-
 const ThemeToggle = ({ isDark, toggleTheme }) => {
-  // Base container styles that don't change
-  const baseTrackStyles = "relative mx-2 flex items-center w-[78px] h-[38px] rounded-full transition-all duration-500 border-[2.5px] outline-none focus:ring-2 ring-blue-400 translate-y-[3px]";
-  
-  // Theme-specific track styles
-  const trackTheme = isDark 
-    ? "bg-white/5 border-blue-500/40" 
-    : "bg-slate-200/40 border-blue-600/50";
+  // 1. Track Styles
+  const trackClasses = isDark 
+    ? "bg-white/5 border-well-blue-500/40" 
+    : "bg-well-slate-200/40 border-well-blue-600/50";
 
-  // Base knob styles (the moving circle)
-  const baseKnobStyles = "absolute z-10 flex items-center justify-center w-[28px] h-[28px] rounded-full shadow-lg transition-all duration-700 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)] border-[1.5px]";
-  
-  // Theme-specific knob positioning and coloring
-  const knobTheme = isDark
-    ? "translate-x-[41px] rotate-[360deg] bg-slate-800 text-cyan-400 border-cyan-400/30"
-    : "translate-x-[4px] rotate-0 bg-white text-blue-700 border-indigo-600/30";
+  // 2. Knob Styles
+  const knobClasses = isDark 
+    ? "translate-x-[41px] bg-well-slate-800 text-well-cyan-400 border-well-cyan-400/30 shadow-black/40" 
+    : "translate-x-[4px] bg-white text-well-blue-700 border-well-indigo-800/20 shadow-slate-200";
+
+  // 3. Common Circle Styles (Dashed Lines in the Background)
+  const circleBase = "absolute w-[26px] h-[26px] rounded-full border-[1.5px] border-dashed transition-colors duration-premium";
 
   return (
     <button 
-      type="button"
       onClick={toggleTheme} 
-      className={`${baseTrackStyles} ${trackTheme}`} 
-      aria-label="Toggle dark mode"
+      aria-label="Toggle Theme"
+      className={`relative mx-2 flex items-center w-[78px] h-[38px] rounded-full transition-all duration-premium border-[2.5px] outline-none focus:ring-2 ring-blue-400 translate-y-[3px] ${trackClasses}`}
     >
-      {/* Decorative Dashed Rings - Combined logic for cleaner JSX */}
-      {[
-        { pos: 'left-[5px]', color: 'border-blue-600/30 dark:border-cyan-400/30' },
-        { pos: 'right-[5px]', color: 'border-indigo-600/30 dark:border-blue-400/30' }
-      ].map((ring, idx) => (
-        <div 
-          key={idx}
-          className={`absolute ${ring.pos} ${ring.color} w-[26px] h-[26px] rounded-full border-[1.5px] border-dashed transition-colors duration-500`} 
-        />
-      ))}
+      {/* Left Circle */}
+      <div className={`${circleBase} left-[5px] border-well-blue-600/20 dark:border-well-cyan-400/20`} />
+      
+      {/* Right Circle */}
+      <div className={`${circleBase} right-[5px] border-well-indigo-800/20 dark:border-well-blue-500/20`} />
       
       {/* Moving Knob */}
-      <div className={`${baseKnobStyles} ${knobTheme}`}>
+      <div className={`absolute z-10 flex items-center justify-center w-[28px] h-[28px] rounded-full transition-all duration-800 ease-[cubic-bezier(0.4,0,0.2,1)] border-[1.5px] ${knobClasses}`}>
         {isDark ? <MoonIcon /> : <SunIcon />}
       </div>
     </button>
   );
 };
+
+// 4. SVG Icons for Sun and Moon
+const MoonIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+  </svg>
+);
+
+const SunIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5" />
+    <path strokeLinecap="round" strokeWidth="2.5" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M19.78 4.22l-1.42 1.42" />
+  </svg>
+);
 
 export default ThemeToggle;
