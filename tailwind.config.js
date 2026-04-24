@@ -6,7 +6,8 @@ export default {
     extend: {
       // 1. Specific Transition Period Definition
       transitionDuration: {
-        'premium': '1500ms',
+        'premium': '2200ms',
+        "interactive": '1000ms',
       },
       // 2. Color Groups
       colors: {

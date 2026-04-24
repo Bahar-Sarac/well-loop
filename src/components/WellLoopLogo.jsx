@@ -16,7 +16,7 @@ const WellLoopLogo = ({ isDark, setIsDark }) => {
 
   return (
     <div className="flex items-center justify-center select-none">
-      <h1 className="flex items-baseline text-6xl font-black tracking-tighter leading-tight">
+      <h1 className="flex items-baseline text-6xl font-black tracking-tight leading-tight">
         <span className={`${syncStyle} bg-gradient-to-r ${gradientLeft} bg-clip-text !text-transparent`}>
           WellL
         </span>
